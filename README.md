@@ -1,3 +1,5 @@
 #LAB7CVDS   
 
-###the lab 7
+### Yeisson Gualdron
+### Carlos Murillo
+### Miguel Castellanos
