@@ -44,10 +44,13 @@ public class JDBCExample {
             con.setAutoCommit(false);
             System.out.println("Valor total pedido 1:"+valorTotalPedido(con, 1));
             List<String> prodsPedido=nombresProductosPedido(con, 1);
+            
             System.out.println("Productos del pedido 1:");
             System.out.println("-----------------------");
+            
             for (String nomprod:prodsPedido){
                 System.out.println(nomprod);
+                
             }
             System.out.println("-----------------------");
             int suCodigoECI=20134423;
@@ -93,14 +96,16 @@ public class JDBCExample {
         List<String> np=new LinkedList<>();
         
         //Crear prepared statement
+        PreparedStatement entrada = con.prepareCall("select NOMBRE from ORD_DETALLE_PEDIDO, ORD_PRODUCTOS where producto_fk=codigo and pedido_fk=? ");
         //asignar parámetros
+        entrada.setInt(1, codigoPedido);
         //usar executeQuery
+        ResultSet rs = entrada.executeQuery();
+        
         //Sacar resultados del ResultSet
         //Llenar la lista y retornarla
-
-            PreparedStatement entrada = con.prepareCall("select NOMBRE from ORD_DETALLE_PEDIDO, ORD_PRODUCTOS where producto_fk=codigo and pedido_fk=? ");
-            entrada.setInt(1, codigoPedido);
-            entrada.execute();
+        while(rs.next()) np.add( rs.getString(1));
+        
         return np;
     }
 
