@@ -15,7 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package edu.eci.cvds.samples.services.client;
-
+package edu.eci.cvds.sampleprj.dao.mybatis.mappers.*;
+package
 
 
 import java.io.IOException;
@@ -67,6 +68,10 @@ public class MyBatisExample {
         //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
         //cm...
         
+        //SqlSessionFactory sessionfact = getSqlSessionFactory();
+        //SqlSession sqlss = sessionfact.openSession();
+        ClientMapper cm=sqlss.getMapper(ClienteMapper.class);
+        System.out.println(cm.consultarClientes()));
         
         
         sqlss.commit();
