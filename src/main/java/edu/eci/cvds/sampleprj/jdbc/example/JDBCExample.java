@@ -35,7 +35,7 @@ public class JDBCExample {
     
     public static void main(String args[]){
         try {
-            String url="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprue";
+            String url="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba";
             String driver="com.mysql.jdbc.Driver";
             String user="bdprueba";
             String pwd="prueba2019";
@@ -98,11 +98,9 @@ public class JDBCExample {
         //Sacar resultados del ResultSet
         //Llenar la lista y retornarla
 
-			PreparedStatement entrada = con.prepareCall("select NOMBRE from ORD_DETALLE_PEDIDOS, ORD_PRODUCTOS where producto_fk==codigo and pedido_fk=? ");
-			entrada.setInt(1, codigoPedido);
-			entrada.execute();
-
-        
+            PreparedStatement entrada = con.prepareCall("select NOMBRE from ORD_DETALLE_PEDIDO, ORD_PRODUCTOS where producto_fk=codigo and pedido_fk=? ");
+            entrada.setInt(1, codigoPedido);
+            entrada.execute();
         return np;
     }
 
