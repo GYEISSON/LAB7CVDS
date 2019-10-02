@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package edu.eci.cvds.samples.services.client;
-package edu.eci.cvds.sampleprj.dao.mybatis.mappers.*;
-package
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.*;
+import edu.eci.cvds.samples.entities.TipoItem.*;
 
 
 import java.io.IOException;
