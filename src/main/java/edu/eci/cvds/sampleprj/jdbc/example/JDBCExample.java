@@ -94,18 +94,17 @@ public class JDBCExample {
      */
     public static List<String> nombresProductosPedido(Connection con, int codigoPedido) throws SQLException{
         List<String> np=new LinkedList<>();
-        
         //Crear prepared statement
         PreparedStatement entrada = con.prepareCall("select NOMBRE from ORD_DETALLE_PEDIDO, ORD_PRODUCTOS where producto_fk=codigo and pedido_fk=? ");
         //asignar parámetros
         entrada.setInt(1, codigoPedido);
         //usar executeQuery
         ResultSet rs = entrada.executeQuery();
-        
         //Sacar resultados del ResultSet
         //Llenar la lista y retornarla
-        while(rs.next()) np.add( rs.getString(1));
-        
+        while(rs.next()){ np.add( 
+            rs.getString(1));
+        }
         return np;
     }
 
@@ -116,14 +115,18 @@ public class JDBCExample {
      * @param codigoPedido código del pedido cuyo total se calculará
      * @return el costo total del pedido (suma de: cantidades*precios)
      */
-    public static int valorTotalPedido(Connection con, int codigoPedido){
+    public static int valorTotalPedido(Connection con, int codigoPedido) throws SQLException{
         
         //Crear prepared statement
+        PreparedStatement entrada = con.prepareCall("select SUM(ORD_DETALLE_PEDIDO.cantidad*ORD_PRODUCTOS.precio) from ORD_PRODUCTOS,ORD_DETALLE_PEDIDO,ORD_PEDIDOS where producto_fk=ORD_PRODUCTOS.codigo and ORD_PEDIDOS.codigo = pedido_fk and ORD_PEDIDOS.codigo=?");
         //asignar parámetros
+        //System.out.println(entrada.toString());
+        entrada.setInt(1, codigoPedido);
         //usar executeQuery
+        ResultSet rs = entrada.executeQuery();  
         //Sacar resultado del ResultSet
-        
-        return 0;
+        rs.next();
+        return rs.getInt(1);
     }
     
 
