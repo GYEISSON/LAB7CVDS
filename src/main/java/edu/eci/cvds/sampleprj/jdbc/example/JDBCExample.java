@@ -39,25 +39,17 @@ public class JDBCExample {
             String driver="com.mysql.jdbc.Driver";
             String user="bdprueba";
             String pwd="prueba2019";
-                        
             Class.forName(driver);
             Connection con=DriverManager.getConnection(url,user,pwd);
             con.setAutoCommit(false);
-                 
-            
             System.out.println("Valor total pedido 1:"+valorTotalPedido(con, 1));
-            
             List<String> prodsPedido=nombresProductosPedido(con, 1);
-            
-            
             System.out.println("Productos del pedido 1:");
             System.out.println("-----------------------");
             for (String nomprod:prodsPedido){
                 System.out.println(nomprod);
             }
             System.out.println("-----------------------");
-            
-            
             int suCodigoECI=20134423;
             registrarNuevoProducto(con, suCodigoECI, "SU NOMBRE", 99999999);            
             con.commit();
