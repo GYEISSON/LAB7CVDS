@@ -9,6 +9,6 @@ package edu.eci.cvds.sampleprj.dao;
  *
  * @author 2127790
  */
-public class PersistenceException extends Exception {
+public class ClienteDAO {
     
 }
