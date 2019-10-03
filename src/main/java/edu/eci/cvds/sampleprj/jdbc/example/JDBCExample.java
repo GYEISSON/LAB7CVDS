@@ -54,7 +54,7 @@ public class JDBCExample {
             }
             System.out.println("-----------------------");
             int suCodigoECI=20134423;
-            registrarNuevoProducto(con, suCodigoECI, "SU NOMBRE", 99999999);            
+            registrarNuevoProducto(con, 21542933, "Miguel Castellanos", 99999999);            
             con.commit();
                         
             
@@ -80,6 +80,11 @@ public class JDBCExample {
         //Asignar parámetros
         //usar 'execute'
     	//PreparedStatement entrada = con.prepareCall("insert into VI_ITEM values ");
+        PreparedStatement entrada = con.prepareCall("insert into ORD_PRODUCTOS values(?, ?, ?)");
+        entrada.setInt(1, codigo);
+        entrada.setString(2, nombre);
+        entrada.setInt(3, precio);
+        entrada.executeUpdate();
         
         con.commit();
         
@@ -102,8 +107,8 @@ public class JDBCExample {
         ResultSet rs = entrada.executeQuery();
         //Sacar resultados del ResultSet
         //Llenar la lista y retornarla
-        while(rs.next()){ np.add( 
-            rs.getString(1));
+        while(rs.next()){ 
+        	np.add(rs.getString(1));
         }
         return np;
     }
