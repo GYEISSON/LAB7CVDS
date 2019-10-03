@@ -21,7 +21,9 @@ import edu.eci.cvds.samples.entities.TipoItem.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.Instant;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -67,6 +69,9 @@ public class MyBatisExample {
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
         //cm...
         System.out.println(cm.consultarClientes());
+        System.out.println(cm.consultarCliente(2154293));
+        
+        
         
         
         
