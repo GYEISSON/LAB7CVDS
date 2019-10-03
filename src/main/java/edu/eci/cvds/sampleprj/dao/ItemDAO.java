@@ -5,6 +5,10 @@
  */
 package edu.eci.cvds.sampleprj.dao;
 import edu.eci.cvds.samples.entities.Item;
+//import edu.eci.cvds.sampleprj.dao.PersistenceException;
+import javax.persistence.PersistenceException;
+
+
 /**
  *
  * @author 2127790
