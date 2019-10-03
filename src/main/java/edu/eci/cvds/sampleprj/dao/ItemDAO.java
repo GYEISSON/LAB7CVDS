@@ -5,17 +5,33 @@
  */
 package edu.eci.cvds.sampleprj.dao;
 import edu.eci.cvds.samples.entities.Item;
-//import edu.eci.cvds.sampleprj.dao.PersistenceException;
-import javax.persistence.PersistenceException;
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
+//import javax.persistence.PersistenceException;
 
-
+ 
 /**
  *
  * @author 2127790
  */
 public interface ItemDAO {
+
+    /**
+     *
+     * @param it
+
+     * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
+     * @throws PersistenceException
+     */
+
     public void save(Item it) throws PersistenceException;
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws edu.eci.cvds.sampleprj.dao.PersistenceException
+     * @throws PersistenceException
+     */
     public Item load(int id) throws PersistenceException;
 
 }
