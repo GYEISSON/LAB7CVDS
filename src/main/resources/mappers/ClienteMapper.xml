@@ -33,7 +33,7 @@
 		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
     </select>
     
-      <select parameterType="map" id="consultarClientes" resultMap="ClienteResult" >
+      <select parameterType="map" id="consultarCliente" resultMap="ClienteResult" >
                 select
 		c.nombre,
 		c.documento,
