@@ -33,5 +33,6 @@ public interface ItemDAO {
      * @throws PersistenceException
      */
     public Item load(int id) throws PersistenceException;
-
+    
+    public void actualizarTarifaItem( int id, long tarifa) throws PersistenceException;
 }

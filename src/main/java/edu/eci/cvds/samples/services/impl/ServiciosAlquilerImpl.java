@@ -10,6 +10,7 @@ import com.google.inject.Singleton;
 import edu.eci.cvds.sampleprj.dao.ClienteDAO;
 import edu.eci.cvds.sampleprj.dao.ItemDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
+import org.mybatis.guice.transactional.Transactional;
 
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
@@ -20,12 +21,15 @@ import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import java.sql.Date;
 import java.util.List;
+import java.util.Calendar;
 
 @Singleton
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Inject
    private ItemDAO itemDAO;
+   @Inject
+   private  ClienteDAO clienteDAO;
 
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
@@ -77,13 +81,26 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    }
 
    @Override
+   @Transactional
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       Calendar calendario = Calendar.getInstance();
+        calendario.setTime(date);
+        calendario.add(Calendar.DATE, numdias);
+        try {
+            clienteDAO.agregarItemRentadoACliente(docu,item.getId(),date,calendario.getTime());
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("Error al agregar el item"+item+" a los items que tiene rentados del cliente"+docu,e);
+        }
    }
 
    @Override
+   @Transactional
    public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            clienteDAO.save(c);
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("Error al registrar el cliente "+c,e);
+        }
    }
 
    @Override
@@ -92,16 +109,31 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    }
 
    @Override
+   @Transactional
    public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            itemDAO.actualizarTarifaItem(id,tarifa);
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("Error al actualizar "+id,e);
+        }
    }
    @Override
+   @Transactional
    public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+            itemDAO.save(i);
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("Error en el item"+i,e);
+        }
    }
 
    @Override
+   @Transactional
    public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+            clienteDAO.vetarCliente(docu,estado?1:0);
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("Error al actualizar la informacion del cliente"+docu,e);
+        }
    }
 }
