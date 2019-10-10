@@ -15,4 +15,10 @@ public interface ClienteDAO {
     public void vetarCliente(long idCliente,int estado) throws PersistenceException;
     public void agregarItemRentadoACliente(long idCliente, int idItem, Date fechainicio,Date fechafin) throws PersistenceException;
     public void save(Cliente cl) throws PersistenceException;
+  
+    public Cliente consultarCliente(long id) throws PersistenceException;
+
+    public List<Cliente> consultarClientes() throws PersistenceException;
+
+    
 }

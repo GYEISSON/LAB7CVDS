@@ -15,4 +15,8 @@ public interface TipoItemMapper {
     
     public void addTipoItem(String des);
 
+    public void addTipoItem(TipoItem tipoItem);
+
+    public List<TipoItem> getTipoItem();
+
 }

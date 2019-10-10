@@ -33,5 +33,11 @@ public interface ClienteMapper {
      * @return 
      */
     public List<Cliente> consultarClientes();
+
+    public void insertarCliente(Cliente cliente);
+
+    public void vetarCliente(long idCliente, int estado);
+
+    public List<Cliente> consultarCliente();
     
 }
