@@ -4,11 +4,15 @@
  * and open the template in the editor.
  */
 package edu.eci.cvds.sampleprj.dao;
-
+import edu.eci.cvds.samples.entities.Cliente;
+import java.util.Date;
+import java.util.List;
 /**
  *
- * @author 2127790
+ * @author Carlos Murillo
  */
-public class ClienteDAO {
-    
+public interface ClienteDAO {
+    public void vetarCliente(long idCliente,int estado) throws PersistenceException;
+    public void agregarItemRentadoACliente(long idCliente, int idItem, Date fechainicio,Date fechafin) throws PersistenceException;
+    public void save(Cliente cl) throws PersistenceException;
 }
